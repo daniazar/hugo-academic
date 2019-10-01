@@ -20,7 +20,7 @@
   </div>
   {{ end }}
 
-  {{ range $page.Params.content.user_groups }}
+  {{ range $page.Params.user_groups }}
   {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
 
   {{if $query}}
@@ -52,7 +52,7 @@
       <h2>{{with $link}}<a href="{{.}}">{{end}}{{ .Params.name }}{{if $link}}</a>{{end}}</h2>
       {{ with .Params.role }}<h3>{{ . | markdownify | emojify }}</h3>{{ end }}
       {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
-      {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
+      {{ with .Params.interests }}<p class="people-interests">{{ delimit . ", " | markdownify | emojify }}</p>{{ end }}
     </div>
   </div>
   {{ end }}
